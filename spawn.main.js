@@ -4,7 +4,7 @@ let spawn = {
         for(let i in config.creepMap){
             let creeps = _.filter(Game.creeps, (creep)=> creep.memory.role == i)
             if(creeps.length < config.creepMap[i].n){
-                let skill = this._skill(config.creepMap[i].skill||[3,1,1])
+                let skill     = this._skill(config.creepMap[i].skill||[3,1,1])
                 let idleSpawn = this._idle(skill.energy)
                 if(!idleSpawn){
                     continue
@@ -17,11 +17,7 @@ let spawn = {
                 })
                 switch(status){
                     case OK:
-                        break;
-                    case ERR_BUSY:
-                        break;
-                    case ERR_NOT_ENOUGH_ENERGY:
-                    case ERR_RCL_NOT_ENOUGH:
+                        idleSpawn.memory.taskTime = Game.time
                         break;
                     default:
                         console.log(`create ${i} fail: ${status}`)
@@ -31,7 +27,7 @@ let spawn = {
     },
     _idle: function(skillValue){
         for(let i in Game.spawns){
-            if(Game.spawns[i].spawning == null && skillValue <= Game.spawns[i].room.energyAvailable){
+            if(Game.spawns[i].spawning == null && Game.spawns[i].memory.taskTime != Game.time && skillValue <= Game.spawns[i].room.energyAvailable){
                 return Game.spawns[i]
             }
         }
