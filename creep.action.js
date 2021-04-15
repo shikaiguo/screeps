@@ -134,7 +134,7 @@ let action = {
         }
         targets = creep.room.find(FIND_RUINS, {
             filter: (o)=> {
-                return o.store.getFreeCapacity(RESOURCE_ENERGY) > 0
+                return o.store.getUsedCapacity(RESOURCE_ENERGY) > 0
             }
         })
         if(targets.length){
@@ -151,10 +151,14 @@ let action = {
                     o.store.getUsedCapacity(RESOURCE_ENERGY) > 0
             }
         })
-        switch(creep.withdraw(targets[0], RESOURCE_ENERGY)){
-            case ERR_NOT_IN_RANGE:
-                this.moveTo(creep, targets[0]);
+        if(targets.length){
+            switch(creep.withdraw(targets[0], RESOURCE_ENERGY)){
+                case ERR_NOT_IN_RANGE:
+                    this.moveTo(creep, targets[0]);
+            }
+            return
         }
+        return
     }
 }
 
