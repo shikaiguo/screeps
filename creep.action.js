@@ -122,7 +122,7 @@ let action = {
     withdraw: function(creep){
         let targets = creep.room.find(FIND_TOMBSTONES, {
             filter: (o) => {
-                return o.store.getFreeCapacity(RESOURCE_ENERGY)>0
+                return o.store.getUsedCapacity(RESOURCE_ENERGY)>0
             }
         })
         if(targets.length){
