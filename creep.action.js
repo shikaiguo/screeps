@@ -27,6 +27,10 @@ let action = {
         return true
     },
     transfer:function(creep){
+        if(creep.store.getFreeCapacity(RESOURCE_ENERGY) > 0 && creep.memory.status != 'transfer'){
+            return false
+        }
+        creep.memory.status = 'transfer'
         delete(creep.memory.sourceId)
         let targets = creep.room.find(FIND_MY_STRUCTURES, {
             filter: (o) => {
@@ -52,8 +56,13 @@ let action = {
         switch(status){
             case ERR_NOT_IN_RANGE:
                 this.moveTo(creep, targets[0], {stroke: '#ffff00'});
+                break
             default:
+                if(creep.store.getUsedCapacity(RESOURCE_ENERGY) == 0){
+                    creep.memory.status = ''
+                }
         }
+        return true
     },
     build:function(creep){
         delete(creep.memory.sourceId)

@@ -9,11 +9,8 @@
 let creepAction = require('creep.action')
 module.exports = {
     run: function (creep) {
-        if (creep.store.getFreeCapacity() > 0) {
+        if (!creepAction.transfer(creep)) {
             creepAction.pickup(creep) || creepAction.harvest(creep)
-        }
-        else {
-            creepAction.transfer(creep)
         }
     }
 };

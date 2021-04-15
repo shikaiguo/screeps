@@ -11,20 +11,20 @@ module.exports = {
     skillMap:   [MOVE, WORK, CARRY, ATTACK, RANGED_ATTACK, HEAL, CLAIM, TOUGH],
     skillValue: [50,   100,  50,    80,     150,           250,  60,    10],
     creepMap: {
-        upgrader: {
-            n: 7,
+        harvester: {
+            n: 5,
             skill: [5,2,2],
-            sign:'🔧'
+            sign: '⛏'
         },
         builder: {
             n: 5,
             skill: [5,2,2],
             sign: '🔨'
         },
-        harvester: {
-            n: 5,
+        upgrader: {
+            n: 7,
             skill: [5,2,2],
-            sign: '⛏'
+            sign:'🔧'
         },
     },
 };
