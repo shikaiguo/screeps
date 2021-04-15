@@ -132,6 +132,18 @@ let action = {
             }
             return
         }
+        targets = creep.room.find(FIND_RUINS, {
+            filter: (o)=> {
+                return o.store.getFreeCapacity(RESOURCE_ENERGY) > 0
+            }
+        })
+        if(targets.length){
+            switch(creep.withdraw(targets[0], RESOURCE_ENERGY)){
+                case ERR_NOT_IN_RANGE:
+                    this.moveTo(creep, targets[0]);
+            }
+            return
+        }
         targets = creep.room.find(FIND_STRUCTURES, {
             filter: (o) => {
                 return (o.structureType == STRUCTURE_EXTENSION ||
