@@ -96,7 +96,6 @@ let action = {
     },
     harvest:function(creep){
         if(typeof(creep.memory.sourceId) === "undefined"){
-            creep.say('creep.memory.sourceId')
             let targets = creep.room.find(FIND_SOURCES_ACTIVE)
             if(!targets.length){
                 return
@@ -113,8 +112,10 @@ let action = {
         switch(status){
             case ERR_NOT_IN_RANGE:
                 this.moveTo(creep, source, {stroke: '#00ff00'})
+                break;
             case ERR_NOT_ENOUGH_RESOURCES:
                 delete(creep.memory.sourceId)
+                break;
             default:
         }
     },
